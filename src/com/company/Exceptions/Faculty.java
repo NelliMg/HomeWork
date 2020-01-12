@@ -2,33 +2,56 @@ package com.company.Exceptions;
 
 import java.util.Scanner;
 
+class NoGroupException extends Exception {
+    public NoGroupException(String message) {
+        super(message);
+    }
+}
+
 public class Faculty implements gpaStrategy {
     public static Scanner input = new Scanner(System.in);
     String facultyName;
     public Group[] groups;
     String[] facultySubjects;
 
-    public Faculty(String facultyName) {
+    public Faculty(String facultyName, Group[] groups, String[] facultySubjects) throws NoGroupException, NoSubjectException {
         this.facultyName = facultyName;
+        if (groups == null) {
+            throw new NoGroupException("no groups in the faculty  " + facultyName);
+        }
+        this.groups = groups;
+        if (facultySubjects == null) {
+            throw new NoSubjectException("No subjects in the faculty");
+        }
+        this.facultySubjects = facultySubjects;
     }
 
     public void addSubject(String newSubject) {
-        String[] curSubjects = new String[facultySubjects.length + 1];
-        for (int i = 0; i < facultySubjects.length; i++) {
-            curSubjects[i] = facultySubjects[i];
+        if (facultySubjects == null) {
+            facultySubjects = new String[1];
+            facultySubjects[0] = newSubject;
+        } else {
+            String[] curSubjects = new String[facultySubjects.length + 1];
+            for (int i = 0; i < facultySubjects.length; i++) {
+                curSubjects[i] = facultySubjects[i];
+            }
+            curSubjects[facultySubjects.length] = newSubject;
+            this.facultySubjects = curSubjects;
         }
-        curSubjects[facultySubjects.length] = newSubject;
-        this.facultySubjects = curSubjects;
     }
 
     public void addGroup(Group newGroup) {
-        Group[] curGroups = new Group[groups.length + 1];
-        for (int i = 0; i < groups.length; i++) {
-            curGroups[i] = groups[i];
+        if (groups == null) {
+            groups = new Group[1];
+            groups[0] = newGroup;
+        } else {
+            Group[] curGroups = new Group[groups.length + 1];
+            for (int i = 0; i < groups.length; i++) {
+                curGroups[i] = groups[i];
+            }
+            curGroups[groups.length] = newGroup;
+            this.groups = curGroups;
         }
-        curGroups[groups.length] = newGroup;
-        this.groups = curGroups;
-
     }
 
     public boolean subjectExists(String curSubject) {
@@ -43,6 +66,9 @@ public class Faculty implements gpaStrategy {
     @Override
     public void calculateGPA() {
         System.out.println("Which subject do you want to calculate the GPA for?\n Please enter the name of the subject");
+        if (facultySubjects == null) {
+            System.out.println("faculty subjects were null");
+        }
         for (int i = 0; i < facultySubjects.length; i++) {
             System.out.println((i + 1) + ": " + facultySubjects[i]);
         }

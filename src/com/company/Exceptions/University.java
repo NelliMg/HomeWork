@@ -2,31 +2,50 @@ package com.company.Exceptions;
 
 import java.util.Scanner;
 
+class NoFacultyException extends Exception {
+    public NoFacultyException(String message) {
+        super(message);
+    }
+}
+
 public class University implements gpaStrategy {
     public static Scanner input = new Scanner(System.in);
     public String[] universitySubjects = {"English", "Essay Writing", "History", "Discrete Mathematics"};
     Faculty[] faculties;
 
-    public University() {
-
+    public University(Faculty[] faculties) throws NoFacultyException {
+        if (faculties == null) {
+            throw new NoFacultyException("No faculties in the University");
+        }
+        this.faculties = faculties;
     }
 
     public void addSubject(String newSubject) {
-        String[] curSubjects = new String[universitySubjects.length + 1];
-        for (int i = 0; i < universitySubjects.length; i++) {
-            curSubjects[i] = universitySubjects[i];
+        if (universitySubjects == null) {
+            universitySubjects = new String[1];
+            universitySubjects[0] = newSubject;
+        } else {
+            String[] curSubjects = new String[universitySubjects.length + 1];
+            for (int i = 0; i < universitySubjects.length; i++) {
+                curSubjects[i] = universitySubjects[i];
+            }
+            curSubjects[universitySubjects.length] = newSubject;
+            this.universitySubjects = curSubjects;
         }
-        curSubjects[universitySubjects.length] = newSubject;
-        this.universitySubjects = curSubjects;
     }
 
     public void addFaculty(Faculty newFacutly) {
-        Faculty[] curFaculty = new Faculty[faculties.length + 1];
-        for (int i = 0; i < faculties.length; i++) {
-            curFaculty[i] = faculties[i];
+        if (faculties == null) {
+            faculties = new Faculty[1];
+            faculties[0] = newFacutly;
+        } else {
+            Faculty[] curFaculty = new Faculty[faculties.length + 1];
+            for (int i = 0; i < faculties.length; i++) {
+                curFaculty[i] = faculties[i];
+            }
+            curFaculty[faculties.length] = newFacutly;
+            this.faculties = curFaculty;
         }
-        curFaculty[faculties.length] = newFacutly;
-        this.faculties = curFaculty;
     }
 
     private boolean subjectExists(String curSubject) {
@@ -56,21 +75,29 @@ public class University implements gpaStrategy {
             }
         }
         int gradeSum = 0, count = 0, subjectIndex = 0;
-        for (int i = 0; i < faculties.length; i++) {
-            if (faculties[i].subjectExists(curSubject)) {
-                for (int j = 0; j < faculties[i].groups.length; j++) {
-                    if (faculties[i].groups[j].subjectExists(curSubject)) {
-                        subjectIndex = faculties[i].groups[j].getSubjectIndex(curSubject);
-                        for (int k = 0; k < faculties[i].groups[j].students.length; k++) {
-                            count++;
-                            gradeSum += faculties[i].groups[j].students[k].grades[subjectIndex];
+        try {
+            for (int i = 0; i < faculties.length; i++) {
+                if (faculties[i].subjectExists(curSubject)) {
+                    for (int j = 0; j < faculties[i].groups.length; j++) {
+                        if (faculties[i].groups[j].subjectExists(curSubject)) {
+                            subjectIndex = faculties[i].groups[j].getSubjectIndex(curSubject);
+                            for (int k = 0; k < faculties[i].groups[j].students.length; k++) {
+                                count++;
+                                gradeSum += faculties[i].groups[j].students[k].grades[subjectIndex];
 
+                            }
                         }
                     }
                 }
             }
+        } catch (NullPointerException ex) {
+            System.out.println("Something went wrong while calculation the GPA of " + curSubject + " in the University");
         }
-        System.out.println("The GPA for University from" + curSubject + "is" + (gradeSum / count));
+        try {
+            System.out.println("The GPA for University from" + curSubject + "is" + (gradeSum / count));
+        } catch (ArithmeticException e) {
+            System.out.println(e);
+        }
 
     }
 }
