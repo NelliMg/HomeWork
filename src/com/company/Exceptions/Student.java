@@ -1,17 +1,5 @@
 package com.company.Exceptions;
 
-class InvalidGradeException extends Exception {
-    public InvalidGradeException(String s) {
-        // super(s);
-        System.out.println(s);
-    }
-}
-
-class NoSubjectException extends Exception {
-    public NoSubjectException(String s) {
-        super(s);
-    }
-}
 
 public class Student implements gpaStrategy {
     private String firstName;
@@ -19,21 +7,21 @@ public class Student implements gpaStrategy {
     String[] studentSubjects;
     int[] grades;
 
-    public Student(String firstName, String lastName, int[] grades, String[] subjects) throws InvalidGradeException, NoSubjectException {
+    public Student(String firstName, String lastName, int[] grades, String[] subjects) throws RuntimeException {
         this.firstName = firstName;
         this.lastName = lastName;
         if (subjects == null) {
-            throw new NoSubjectException(" 0 subjects were added to the student");
+            throw new RuntimeException(" 0 subjects were added to the student");
         }
         this.studentSubjects = subjects;
 
         if (grades == null) {
-            throw new InvalidGradeException("Invalid Grade");
+            throw new RuntimeException("Invalid Grade");
         } else {
             this.grades = new int[grades.length];
             for (int i = 0; i < grades.length; i++) {
                 if (grades[i] > 10 || grades[i] < 0) {
-                    throw new InvalidGradeException("Invalid Grade");
+                    throw new RuntimeException("Invalid Grade");
                 }
             }
         }
@@ -41,7 +29,7 @@ public class Student implements gpaStrategy {
 
     }
 
-    public void addSubject(String newSubject) {
+    public void addSubject(String newSubject, int grade) {
         if (studentSubjects == null) {
             studentSubjects = new String[1];
             studentSubjects[0] = newSubject;
@@ -59,6 +47,15 @@ public class Student implements gpaStrategy {
             curGrades[grades.length] = 10;
             grades = curGrades;
         }
+    }
+
+    public int getSubjectIndex(String subject) {
+        for (int j = 0; j < studentSubjects.length; j++) {
+            if (studentSubjects[j].toLowerCase().equals(subject.toLowerCase())) {
+                return j;
+            }
+        }
+        return -1;
     }
 
     @Override
