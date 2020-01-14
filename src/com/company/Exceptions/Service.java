@@ -19,7 +19,7 @@ public class Service {
 
         groups1[0] = new Group("Group N1", students);
         String[] subjects2 = {"History", "Discrete Mathematics"};
-        Group[] groups2=null ;
+        Group[] groups2=new Group[1] ;
 
         s3 = new Student("Armen", "Khachatryan", grades, subjects2);
 

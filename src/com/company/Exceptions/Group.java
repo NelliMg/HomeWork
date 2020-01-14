@@ -48,12 +48,16 @@ public class Group implements gpaStrategy {
         } catch (Exception e) {
             System.out.println(" An error occured during calculation the GPA for a group.");
         }
-        double average = gradeSum / count;
+        double average = 0;
         try {
-            System.out.println("The GPA for University from" + curSubject + "is" + average);
+            average = gradeSum / count;
         } catch (ArithmeticException e) {
-            System.out.println("division to zero");
+            e.printStackTrace();
         }
+        if (count != 0) {
+            System.out.println("The GPA for Group " + groupName + " from" + curSubject + "is" + (gradeSum / count));
+        } else
+            System.out.println("No students were found in " + groupName + " studying " + curSubject);
 
 
     }

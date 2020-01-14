@@ -57,10 +57,15 @@ public class University implements gpaStrategy {
                 NullPointerException ex) {
             System.out.println("Something went wrong while calculation the GPA of " + curSubject + " in the University");
         }
+        double average = 0;
         try {
-            System.out.println("The GPA for University from" + curSubject + "is" + (gradeSum / count));
-        } catch (
-                ArithmeticException e) {
+            average = gradeSum / count;
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
+        try {
+            System.out.println("The GPA for University from" + curSubject + "is" + average);
+        } catch (ArithmeticException e) {
             System.out.println(e);
         }
 

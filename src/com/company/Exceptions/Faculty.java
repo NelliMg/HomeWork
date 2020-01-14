@@ -39,21 +39,25 @@ public class Faculty implements gpaStrategy {
         String curSubject = input.nextLine();
 
         int gradeSum = 0, count = 0, subjectIndex = 0;
-        for (int j = 0; j < groups.length; j++) {
+        try {
+            for (int j = 0; j < groups.length; j++) {
 
-            for (int k = 0; k < groups[j].students.length; k++) {
-                subjectIndex = groups[j].students[k].getSubjectIndex(curSubject);
-                if (subjectIndex != -1) {
-                    count++;
-                    gradeSum += groups[j].students[k].grades[subjectIndex];
+                for (int k = 0; k < groups[j].students.length; k++) {
+                    subjectIndex = groups[j].students[k].getSubjectIndex(curSubject);
+                    if (subjectIndex != -1) {
+                        count++;
+                        gradeSum += groups[j].students[k].grades[subjectIndex];
+                    }
+
                 }
-
             }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         if (count != 0) {
-            System.out.println("The GPA for University from" + curSubject + "is" + (gradeSum / count));
+            System.out.println("The GPA for Faculty from" + curSubject + "is" + (gradeSum / count));
         } else
-            System.out.println("No sudents were found in " + facultyName + " studying " + curSubject);
+            System.out.println("No students were found in " + facultyName + " studying " + curSubject);
     }
 
 
