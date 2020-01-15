@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class Faculty implements GpaStrategy {
     public static Scanner input = new Scanner(System.in);
-    public String facultyName;
-     Group[] groups;
+    private String facultyName;
+     private Group[] groups;
 
     public Faculty(String facultyName, Group[] groups){
         this.facultyName = facultyName;
@@ -48,18 +48,18 @@ public class Faculty implements GpaStrategy {
             throw new NoGroupException("No groups in the Faculty");
         } else {
             for (int j = 0; j < groups.length; j++) {
-                if (groups[j].students == null) {
+                if (groups[j].getStudents() == null) {
                     throw new NoStudentException("No students in the group");
                 } else {
-                    for (int k = 0; k < groups[j].students.length; k++) {
-                        subjectIndex = groups[j].students[k].getSubjectIndex(curSubject);
+                    for (int k = 0; k < groups[j].getStudents().length; k++) {
+                        subjectIndex = groups[j].getStudents()[k].getSubjectIndex(curSubject);
                         if(subjectIndex!=-1){
-                        if (groups[j].students[k].getGrades() == null || groups[j].students[k].getGrades()[subjectIndex] < 0 || groups[j].students[k].getGrades()[subjectIndex] > 10) {
+                        if (groups[j].getStudents()[k].getGrades() == null || groups[j].getStudents()[k].getGrades()[subjectIndex] < 0 || groups[j].getStudents()[k].getGrades()[subjectIndex] > 10) {
                             throw new InvalidGradeException("Invalid grade");
                         } else {
 
                             count++;
-                            gradeSum += groups[j].students[k].getGrades()[subjectIndex];
+                            gradeSum += groups[j].getStudents()[k].getGrades()[subjectIndex];
                         }}
 
                     }

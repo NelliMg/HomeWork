@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 public class Group implements GpaStrategy {
     public static Scanner input = new Scanner(System.in);
-    String groupName;
-    Student[] students;
+     private String groupName;
+     private Student[] students;
 
     public Group(String groupName, Student[] students) {
         this.groupName = groupName;

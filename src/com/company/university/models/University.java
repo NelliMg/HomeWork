@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class University implements GpaStrategy {
     public static Scanner input = new Scanner(System.in);
     private String[] universitySubjects = {"English", "Essay Writing", "History", "Discrete Mathematics"};
-    Faculty[] faculties;
+    private Faculty[] faculties;
 
     public University(Faculty[] faculties) {
         this.faculties = faculties;
@@ -43,22 +43,22 @@ public class University implements GpaStrategy {
             throw new NoFacultyException("No faculties in the university");
         } else {
             for (int i = 0; i < faculties.length; i++) {
-                if (faculties[i].groups == null) {
+                if (faculties[i].getGroups() == null) {
                     throw new NoFacultyException("No groups in the faculty");
                 } else {
-                    for (int j = 0; j < faculties[i].groups.length; j++) {
-                        if (faculties[i].groups[j].students == null) {
+                    for (int j = 0; j < faculties[i].getGroups().length; j++) {
+                        if (faculties[i].getGroups()[j].getStudents() == null) {
                             throw new NoStudentException("No Students in the group");
                         } else {
-                            for (int k = 0; k < faculties[i].groups[j].students.length; k++) {
-                                subjectIndex = faculties[i].groups[j].students[k].getSubjectIndex(curSubject);
+                            for (int k = 0; k < faculties[i].getGroups()[j].getStudents().length; k++) {
+                                subjectIndex = faculties[i].getGroups()[j].getStudents()[k].getSubjectIndex(curSubject);
                                 if (subjectIndex != -1) {
-                                    if (faculties[i].groups[j].students[k].getGrades() == null || faculties[i].groups[j].students[k].getGrades()[subjectIndex] < 0 || faculties[i].groups[j].students[k].getGrades()[subjectIndex] > 10) {
+                                    if (faculties[i].getGroups()[j].getStudents()[k].getGrades() == null || faculties[i].getGroups()[j].getStudents()[k].getGrades()[subjectIndex] < 0 || faculties[i].getGroups()[j].getStudents()[k].getGrades()[subjectIndex] > 10) {
                                         throw new InvalidGradeException("Invalid grade");
                                     } else {
 
                                         count++;
-                                        gradeSum += faculties[i].groups[j].students[k].getGrades()[subjectIndex];
+                                        gradeSum += faculties[i].getGroups()[j].getStudents()[k].getGrades()[subjectIndex];
                                     }
                                 }
                             }
