@@ -1,7 +1,12 @@
-package com.company.Exceptions;
+package com.company.university.services;
 
-public class Service {
-    public static University initUniversity(University university) {
+import com.company.university.models.Faculty;
+import com.company.university.models.Group;
+import com.company.university.models.Student;
+import com.company.university.models.University;
+
+public class UniversityService {
+    public static University initUniversity() {
         System.out.println("in init");
         Faculty[] faculties = new Faculty[2];
         faculties = new Faculty[2];
@@ -33,8 +38,7 @@ public class Service {
         faculties[0] = new Faculty("Linguistics", groups1);
         faculties[1] = new Faculty("Informatics", groups2);
 
-        university = new University(faculties);
-        System.out.println(university.faculties[0].facultyName);
+       University university = new University(faculties);
         return university;
 
     }
