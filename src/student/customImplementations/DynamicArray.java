@@ -54,7 +54,7 @@ public class DynamicArray {
         }
     }
     public Student get(int index){
-        if(sArray==null||sArray.length-1<index){
+        if(sArray==null||sArray.length-1<index||index<0){
             return null;
         }else{
             return sArray[index];
