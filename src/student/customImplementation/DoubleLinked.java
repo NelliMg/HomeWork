@@ -10,10 +10,10 @@ public class DoubleLinked implements Iterable<Student> {
     private Node end;
     private int size;
 
-    static class  Node {
-        Student student;
-        Node previous;
-        Node next;
+    private static class  Node {
+        private Student student;
+        private Node previous;
+        private Node next;
 
         public Node(Student student, Node previous, Node next) {
             this.student = student;
@@ -26,6 +26,26 @@ public class DoubleLinked implements Iterable<Student> {
 
         private void setNext(Node next) {
             this.next = next;
+        }
+    }
+
+    private class CustomIterator implements Iterator<Student> {
+        DoubleLinked.Node current;
+
+        public CustomIterator(DoubleLinked.Node current) {
+            this.current = current;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return current!=null;
+        }
+
+        @Override
+        public Student next() {
+            Student s=current.student;
+            current=current.next;
+            return s;
         }
     }
 

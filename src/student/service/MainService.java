@@ -1,6 +1,5 @@
 package student.service;
 
-import student.customImplementation.CustomIterator;
 import student.customImplementation.DoubleLinked;
 import student.customImplementation.DynamicArray;
 import student.model.Student;
@@ -39,20 +38,20 @@ public class MainService {
     }
 
     public static void printDoubleLinked(DoubleLinked list) {
-        CustomIterator iterator= (CustomIterator) list.iterator();
+        Iterator<Student> iterator=list.iterator();
         while(iterator.hasNext()){
             System.out.println(iterator.next());
             }
     }
 
     public static void printLinkedList(LinkedList<Student> linkedList) {
-        Iterator iterator=linkedList.iterator();
+        Iterator<Student> iterator=linkedList.iterator();
         while (iterator.hasNext()){
             System.out.println(iterator.next());
         }
     }
     public static void printArrayList(ArrayList<Student> arrayList) {
-        Iterator iterator=arrayList.iterator();
+        Iterator<Student> iterator=arrayList.iterator();
         while (iterator.hasNext()){
             System.out.println(iterator.next());
         }
