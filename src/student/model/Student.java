@@ -1,11 +1,11 @@
-package student.models;
+package student.model;
 
-public class ComparableStudent implements Comparable<ComparableStudent> {
-   private String firstName;
-   private String lastName;
-   private int age;
+public class Student implements Comparable<Student>{
+    private String firstName;
+    private String lastName;
+    private int age;
 
-    public ComparableStudent(String firstName, String lastName, int age) {
+    public Student(String firstName, String lastName, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -24,7 +24,11 @@ public class ComparableStudent implements Comparable<ComparableStudent> {
     }
 
     @Override
-    public int compareTo(ComparableStudent comparableStudent) {
+    public String toString() {
+        return  firstName+" "+ lastName+ " "+age;
+    }
+    @Override
+    public int compareTo(Student comparableStudent) {
         String comparableLastName = comparableStudent.getLastName();
         return this.lastName.compareTo(comparableLastName);
     }

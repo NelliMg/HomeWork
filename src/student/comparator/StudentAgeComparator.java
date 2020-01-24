@@ -1,6 +1,6 @@
-package student.customImplementations;
+package student.comparator;
 
-import student.models.Student;
+import student.model.Student;
 
 import java.util.Comparator;
 
