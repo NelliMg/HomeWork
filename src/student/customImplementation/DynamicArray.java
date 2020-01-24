@@ -11,17 +11,29 @@ public class DynamicArray {
         sArray = new Student[this.capacity];
     }
 
-    public void add(Student student) {
+    private void resizeArray(){
+        Student[] curArray = new Student[capacity];
+        for (int i = 0; i < size; i++) {
+            curArray[i] = sArray[i];
+        }
+        sArray = curArray;
+
+    }
+
+    private void changeCapacity(){
         if (size == capacity) {
             capacity=(int)(capacity*1.5);
-            Student[] curArray = new Student[capacity];
-            for (int i = 0; i < size(); i++) {
-                curArray[i] = sArray[i];
-            }
-            sArray = curArray;
+            resizeArray();
+        }else if (size > 10 && size < (int)(capacity / 1.5)) {
+            capacity = (int) (capacity / 1.5);
+            resizeArray();
         }
-            sArray[size] = student;
-            size++;
+    }
+
+    public void add(Student student) {
+        changeCapacity();
+        sArray[size] = student;
+        size++;
     }
 
     private void removeAt(int index) {
@@ -29,14 +41,7 @@ public class DynamicArray {
             sArray[i] = sArray[i + 1];
             size--;
         }
-        if (size > 10 && size < capacity / 1.5) {
-            capacity=(int) (size / 1.5);
-            Student[] curArray = new Student[capacity];
-            for (int i = 0; i < size; i++) {
-                curArray[i] = sArray[i];
-            }
-            sArray = curArray;
-        }
+        changeCapacity();
     }
 
     public boolean remove(Student student) {
