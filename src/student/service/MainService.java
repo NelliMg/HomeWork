@@ -13,8 +13,6 @@ public class MainService {
     public static Scanner input = new Scanner(System.in);
 
     public static void initListAndArray(DoubleLinked list, DynamicArray arr) {
-
-        System.out.print("Please enter the number of students:");
         boolean correctInput = false;
         int studentCount = 0;
         while (!correctInput) {
