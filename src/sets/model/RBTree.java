@@ -62,14 +62,13 @@ public class RBTree<T extends Comparable<T>> implements Iterable<T> {
 
     public boolean remove(T item) {
         if (search(item)) {
-            Node current = findNode(item);
-            removeNode(current);
-            return true;
+            findAndRemoveNode(item);
+             return true;
         }
         return false;
     }
 
-    private Node rebuild(Node removableNode) {
+    private Node removeNode(Node removableNode) {
         //doesn't have child
         if (removableNode.left == null && removableNode.right == null) {
             return null;
@@ -84,7 +83,8 @@ public class RBTree<T extends Comparable<T>> implements Iterable<T> {
                 removableNode = parent.left;
                 parent.left = null;
             } else {
-                removableNode = parent.left.right;
+                removableNode = parent.left;
+                parent.left=parent.left.right;
                 parent.left.right = null;
             }
             removableNode.left = temp.left;
@@ -99,38 +99,25 @@ public class RBTree<T extends Comparable<T>> implements Iterable<T> {
          return removableNode.right;
     }
 
-    private void removeNode(Node removableNode) {
-        if (head == removableNode) {
-            head = rebuild(head);
-        } else recursiveRemoveNode(head, removableNode);
+    private void findAndRemoveNode(T item) {
+        if (head.data == item) {
+            head = removeNode(head);
+        } else recursiveFindParentNode(head, item);
     }
 
-    private void recursiveRemoveNode(Node parentNode, Node removableNode) {
-        if (parentNode.left == removableNode) {
-            parentNode.left = rebuild(parentNode.left);
-        } else if (parentNode.right == removableNode) {
-            parentNode.right = rebuild(parentNode.right);
+    private void recursiveFindParentNode(Node parentNode,T item) {
+        if (parentNode.left.data == item) {
+            parentNode.left = removeNode(parentNode.left);
+        } else if (parentNode.right.data == item) {
+            parentNode.right = removeNode(parentNode.right);
         } else {
-            if (parentNode.data.compareTo(removableNode.data) > 0) {
-                recursiveRemoveNode(parentNode.left, removableNode);
+            if (parentNode.data.compareTo(item) > 0) {
+                recursiveFindParentNode(parentNode.left, item);
             } else {
-                recursiveRemoveNode(parentNode.right, removableNode);
+                recursiveFindParentNode(parentNode.right, item);
             }
         }
 
-    }
-
-    private Node findNode(T item) {
-        return recursiveFindNode(head, item);
-    }
-
-    private Node recursiveFindNode(Node head, T item) {
-        if (head.data.equals(item)) {
-            return head;
-        }
-        return item.compareTo(head.data) < 0
-                ? recursiveFindNode(head.left, item)
-                : recursiveFindNode(head.right, item);
     }
 
     public void print() {
