@@ -1,19 +1,14 @@
 package sets;
 
-import sets.model.MySet;
+import sets.implementation.SearchTree;
 
-public class Main {
+public class Main{
     public static void main(String[] args) {
-        MySet<Integer> set= new MySet<>();
-        set.add(15);
-        set.add(100);
-        set.add(187);
-        set.add(61);
-        set.add(0);
-        set.add(485);
-        set.add(87);
-        set.add(0);
-        set.remove(15);
-        set.print();
+        SearchTree<Integer> tree = new SearchTree<>();
+        tree.add(15);
+        tree.add(4);
+        tree.add(10);
+        tree.remove(10);
+
     }
 }

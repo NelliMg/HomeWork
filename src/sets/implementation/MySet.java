@@ -1,25 +1,21 @@
-package sets.model;
+package sets.implementation;
+
+import org.jetbrains.annotations.NotNull;
 
 public class MySet<T extends Comparable<T>> {
-    private RBTree<T> setTree;
+    private SearchTree<T> setTree;
     private int size;
 
     public MySet() {
-        this.setTree = new RBTree<>();
+        this.setTree = new SearchTree<>();
     }
-    public boolean add(T item){
-        if(setTree.search(item)){
-            return false;
-        }else{
-            setTree.add(item);
-            size++;
-            return true;
-            }
+    public boolean add(@NotNull T item){
+        return setTree.add(item);
     }
-    public boolean contains(T item){
+    public boolean contains(@NotNull T item){
         return setTree.search(item);
     }
-    public boolean remove(T item){
+    public boolean remove(@NotNull T item){
         if(!setTree.search(item)){
             return false;
         }else{

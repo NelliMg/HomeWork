@@ -1,0 +1,45 @@
+package sets.model;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
+
+/**
+ * Class Coffee
+ * Which has two fields
+ * 1)Coffee type coffee
+ * 2)Integer type price
+ * functions equals hashCode and compareTo were overriden
+ */
+public class MyCoffee implements Comparable<MyCoffee>{
+    private Coffee coffee;
+    private Integer price;
+
+    public MyCoffee(Coffee coffee, Integer price) {
+        this.coffee = coffee;
+        this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MyCoffee myCoffee = (MyCoffee) o;
+        return price == myCoffee.price &&
+                coffee == myCoffee.coffee;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(coffee, price);
+    }
+
+    @Override
+    public int compareTo(@NotNull MyCoffee myCoffee) {
+        int comparablePrice=myCoffee.price;
+        Coffee comparableCoffee= myCoffee.coffee;
+        return this.price.compareTo(comparablePrice)==0
+                ? this.coffee.name().compareTo(comparableCoffee.name())
+                :this.price.compareTo(comparablePrice);
+    }
+}

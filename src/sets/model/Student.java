@@ -2,6 +2,11 @@ package sets.model;
 
 import java.util.Objects;
 
+/**
+ * A simple  class implementation of Student
+ * Two private fields firstName and LastName
+ */
+
 public class Student implements Comparable<Student> {
     private String firstName;
     private String lastName;
@@ -10,6 +15,7 @@ public class Student implements Comparable<Student> {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
 
     public String getFirstName() {
         return firstName;
@@ -24,6 +30,13 @@ public class Student implements Comparable<Student> {
         return firstName + " " + lastName;
     }
 
+    /**
+     *
+     * @param comparableStudent recieves the Student to be compared to
+     *                          compares first their Lastnames and if they are equal compares firstnames
+     * @return 1 if the object is greater then the comparable object,-1 if Object is smaller and 0 if they are equal
+     *
+     */
     @Override
     public int compareTo(Student comparableStudent) {
         String comparableLastName = comparableStudent.getLastName();
