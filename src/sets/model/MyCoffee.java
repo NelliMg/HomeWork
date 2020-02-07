@@ -42,4 +42,9 @@ public class MyCoffee implements Comparable<MyCoffee>{
                 ? this.coffee.name().compareTo(comparableCoffee.name())
                 :this.price.compareTo(comparablePrice);
     }
+
+    @Override
+    public String toString() {
+        return  coffee.name() + ": "+ price;
+    }
 }

@@ -1,14 +1,21 @@
 package sets;
 
-import sets.implementation.SearchTree;
+import sets.implementation.MySet;
+import sets.model.MyCoffee;
+import sets.model.Student;
+import sets.service.MainService;
 
 public class Main{
     public static void main(String[] args) {
-        SearchTree<Integer> tree = new SearchTree<>();
-        tree.add(15);
-        tree.add(4);
-        tree.add(10);
-        tree.remove(10);
+        MySet<Student> mySetStudent= new MySet<>();
+        mySetStudent= MainService.initializeMysetStudent();
+        mySetStudent.print();
+
+        MySet<MyCoffee> mySetCoffee= new MySet<>();
+        mySetCoffee=MainService.initializeMysetCoffee();
+        mySetCoffee.print();
+
+
 
     }
 }
