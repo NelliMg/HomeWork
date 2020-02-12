@@ -1,9 +1,7 @@
 package sets.service;
 
 import sets.implementation.MySet;
-import sets.model.Coffee;
-import sets.model.MyCoffee;
-import sets.model.Student;
+import sets.model.*;
 
 public class MainService {
     public static MySet<Student> initializeMysetStudent(){
@@ -15,9 +13,17 @@ public class MainService {
     }
     public static MySet<MyCoffee> initializeMysetCoffee(){
         MySet<MyCoffee> mySet= new MySet<>();
-        mySet.add(new MyCoffee(Coffee.ESPRESSO,8));
-        mySet.add(new MyCoffee(Coffee.ESPRESSO,9));
-        mySet.add(new MyCoffee(Coffee.CAPPUCCINO,10));
+        mySet.add(new MyCoffee(CoffeeType.ESPRESSO,8));
+        mySet.add(new MyCoffee(CoffeeType.ESPRESSO,9));
+        mySet.add(new MyCoffee(CoffeeType.CAPPUCCINO,10));
+        mySet.add(new MyCoffee(CoffeeType.ESPRESSO,8));
+        return mySet;
+    }
+    public static MySet<Glasses> initializeMySetGlasses(){
+        MySet<Glasses> mySet= new MySet<>();
+        mySet.add(new Glasses(Color.BLUE,Size.MEDIUM));
+        mySet.add(new Glasses(Color.GREEN,Size.LARGE));
+        mySet.add(new Glasses(Color.BLUE,Size.LARGE));
         return mySet;
     }
 }

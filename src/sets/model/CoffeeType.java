@@ -1,6 +1,6 @@
 package sets.model;
 
-public enum Coffee {
+public enum CoffeeType {
     ARABICA,
     CAPPUCCINO,
     ESPRESSO,

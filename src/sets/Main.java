@@ -1,6 +1,7 @@
 package sets;
 
 import sets.implementation.MySet;
+import sets.model.Glasses;
 import sets.model.MyCoffee;
 import sets.model.Student;
 import sets.service.MainService;
@@ -15,7 +16,9 @@ public class Main{
         mySetCoffee=MainService.initializeMysetCoffee();
         mySetCoffee.print();
 
-
+        MySet<Glasses> mySetGlasses= new MySet<>();
+        mySetGlasses = MainService.initializeMySetGlasses();
+        mySetGlasses.print();
 
     }
 }

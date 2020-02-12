@@ -12,6 +12,7 @@ import java.util.Iterator;
 
 public class SearchTree<T extends Comparable<T>> implements Iterable<T> {
     private Node head;
+    private  boolean added=true;
 
     @NotNull
     @Override
@@ -43,6 +44,7 @@ public class SearchTree<T extends Comparable<T>> implements Iterable<T> {
      */
     private Node recursiveAdd(Node current, T item) {
         if (current == null) {
+            added=true;
             return new Node(item);
         }else if (current.data.compareTo(item) > 0) {
             current.left = recursiveAdd(current.left, item);
@@ -57,13 +59,14 @@ public class SearchTree<T extends Comparable<T>> implements Iterable<T> {
      * @param item
      * @return false if the item existed/true if it didn't exist and was successfully added
      */
-    public boolean add(@NotNull T item) {
-        if(search(item)){
-            return false;
-        }else{
+    public boolean add(T item) {
+        if(item==null){
+            throw  new RuntimeException("You tried to add a null item");
+        }
+        added=false;
         head = recursiveAdd(head, item);
-        return true;}
-    }
+        return added;
+      }
 
     /**
      *
@@ -88,7 +91,10 @@ public class SearchTree<T extends Comparable<T>> implements Iterable<T> {
      * @param item
      * @return true if contains such item/ false if tree doesn't contain
      */
-    public boolean search(@NotNull T item) {
+    public boolean search(T item) {
+        if(item==null){
+            throw  new RuntimeException("You tried to see if a null item is contained");
+        }
         return recursiveSearch(head, item);
     }
 
@@ -98,7 +104,10 @@ public class SearchTree<T extends Comparable<T>> implements Iterable<T> {
      * @return true if removed/ false if such element was not found in the tree
      */
 
-    public boolean remove( @NotNull T item) {
+    public boolean remove(T item) {
+        if(item==null){
+            throw  new RuntimeException("You tried to remove a null item");
+        }
         if (search(item)) {
             findAndRemoveNode(item);
              return true;

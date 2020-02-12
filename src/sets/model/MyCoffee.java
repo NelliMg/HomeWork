@@ -1,7 +1,5 @@
 package sets.model;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
 
 /**
@@ -12,10 +10,10 @@ import java.util.Objects;
  * functions equals hashCode and compareTo were overriden
  */
 public class MyCoffee implements Comparable<MyCoffee>{
-    private Coffee coffee;
+    private CoffeeType coffee;
     private Integer price;
 
-    public MyCoffee(Coffee coffee, Integer price) {
+    public MyCoffee(CoffeeType coffee, Integer price) {
         this.coffee = coffee;
         this.price = price;
     }
@@ -35,9 +33,9 @@ public class MyCoffee implements Comparable<MyCoffee>{
     }
 
     @Override
-    public int compareTo(@NotNull MyCoffee myCoffee) {
+    public int compareTo(MyCoffee myCoffee) {
         int comparablePrice=myCoffee.price;
-        Coffee comparableCoffee= myCoffee.coffee;
+        CoffeeType comparableCoffee= myCoffee.coffee;
         return this.price.compareTo(comparablePrice)==0
                 ? this.coffee.name().compareTo(comparableCoffee.name())
                 :this.price.compareTo(comparablePrice);
